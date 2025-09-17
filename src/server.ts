@@ -25,7 +25,7 @@ app.use('/api/contacts', contactRoutes);
 
 // ✅ Health check
 app.get('/api/health', (req, res) => {
-  res.json({ 
+  res.json({
     success: true,
     message: 'Server is running!',
     timestamp: new Date().toISOString()
