@@ -11,8 +11,20 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ Middleware
+const allowedOrigins = [
+  process.env.FRONTEND_URL,   // Netlify frontend
+  "http://localhost:5173"     // Local dev
+].filter(Boolean);
+
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, "http://localhost:5173"].filter(Boolean),
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed for origin: " + origin));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
