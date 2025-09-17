@@ -4,13 +4,14 @@
   "description": "Backend API for CRUD application with Prisma and TypeScript",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio"
+    "start": "node dist/server.js",                // start compiled backend
+    "dev": "nodemon --exec ts-node src/server.ts", // local dev mode
+    "build": "tsc",                                // compile TypeScript
+    "db:generate": "prisma generate",              // regenerate Prisma client
+    "db:push": "prisma db push",                   // push schema (non-migration)
+    "db:migrate": "prisma migrate dev",            // dev migration
+    "db:studio": "prisma studio",                  // DB GUI
+    "postinstall": "prisma generate"               // ensure Prisma client after npm install
   },
   "dependencies": {
     "express": "^4.18.2",
