@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import ContactList from './components/ContactList';
 import ContactForm from './components/ContactForm';
 import { Contact, CreateContactData, UpdateContactData } from './types/Contact';
 import { contactService } from './services/api';
+
 
 function App() {
   const [contacts, setContacts] = useState<Contact[]>([]);
