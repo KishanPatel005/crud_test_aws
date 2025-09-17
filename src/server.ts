@@ -3,31 +3,27 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import contactRoutes from './routes/contactRoutes';
-import cors from "cors";
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
+// Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// ✅ Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes
+// ✅ Routes
 app.use('/api/contacts', contactRoutes);
 
-// Health check
+// ✅ Health check
 app.get('/api/health', (req, res) => {
   res.json({ 
     success: true,
@@ -36,7 +32,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 404 handler
+// ✅ 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
@@ -44,7 +40,7 @@ app.use('*', (req, res) => {
   });
 });
 
-// Error handler
+// ✅ Error handler
 app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error:', error);
   res.status(500).json({
@@ -54,6 +50,7 @@ app.use((error: Error, req: express.Request, res: express.Response, next: expres
   });
 });
 
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
